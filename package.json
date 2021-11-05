@@ -1,0 +1,56 @@
+{
+  "name": "recipe-box-api",
+  "version": "0.1.0",
+  "description": "a small Express API using TypeScript, Prisma, and Postgres",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint src",
+    "start": "ts-node ./src/index.ts",
+    "start:dev": "ts-node-dev --respawn ./src/index.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watchAll": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanbsmith/recipe-box-api.git"
+  },
+  "author": "Alan B Smith <a.bax.smith@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alanbsmith/recipe-box-api/issues"
+  },
+  "homepage": "https://github.com/alanbsmith/recipe-box-api#readme",
+  "dependencies": {
+    "@prisma/client": "^3.4.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "prisma": "^3.4.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix",
+    "*.{ts,md}": "prettier --write"
+  }
+}

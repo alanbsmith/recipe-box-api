@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["dataproxy"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String
+  yield       Int
+  servings    Int
+  prepTime    String?
+  cookTime    String?
+  steps       RecipeStep[]
+  ingredients RecipeIngredient[]
+  tags        RecipeTag[]
+}
+
+model RecipeIngredient {
+  id           Int        @id @default(autoincrement())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  recipeId     Int
+  ingredientId Int
+  amount       Float
+  unit         String
+  Recipe       Recipe      @relation(fields: [recipeId], references: [id])
+  Ingredient   Ingredient  @relation(fields: [ingredientId], references: [id])
+}
+
+model Ingredient {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  Recipes   RecipeIngredient[]
+}
+
+model RecipeStep {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recipeId  Int
+  Recipe    Recipe @relation(fields: [recipeId], references: [id])
+}
+
+model RecipeTag {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  recipeId  Int
+  tagId     Int
+  Recipe    Recipe    @relation(fields: [recipeId], references: [id])
+  Tag       Tag       @relation(fields: [tagId], references: [id])
+}
+
+model Tag {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  recipes   RecipeTag[]
+}
